@@ -164,6 +164,13 @@ Sitemap: ${BASE_URL}/sitemap.xml
     res.send(robots);
   });
 
+  // 2.5 Dynamic Google Site Verification HTML File
+  app.get(/^\/google([a-zA-Z0-9_-]+)\.html$/, (req, res) => {
+    const code = req.params[0];
+    res.setHeader("Content-Type", "text/html; charset=utf-8");
+    res.send(`google-site-verification: google${code}.html`);
+  });
+
   // 3. Public SEO Settings API
   app.get("/api/seo/settings", async (_req, res) => {
     try {
