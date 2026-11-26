@@ -108,12 +108,12 @@ export const DEFAULT_HERO_VISIBILITY: HeroVisibilitySettings = {
 
 export const DEFAULT_HERO_SETTINGS: HeroSectionSettings = {
   published: true,
-  badgeText: "Complete Dental Care for Every Generation",
+  badgeText: "Trusted Dentist in Erode · Surampatti Four Road",
   clinicName: "Sri Saraswathi Dental Clinic",
-  clinicTagline: "Creating Healthy Smiles, Changing Lives.",
-  heading: "Your Smile Deserves Expert Care. A Lifetime of Confidence",
+  clinicTagline: "Creating Healthy Smiles, Changing Lives in Erode.",
+  heading: "Best Dental Clinic in Erode — Expert Care & Confident Smiles",
   description:
-    "From your child's first dental visit to advanced smile transformations, our team brings compassionate care, modern treatments, and personalized attention together under one roof. Discover a dental experience where comfort comes first, every concern is heard, and every smile matters.",
+    "Welcome to Sri Saraswathi Dental Clinic, the trusted dental clinic in Erode led by Dr. Kishore Kumar at Surampatti Four Road. From gentle root canal treatment and dental implants to braces and teeth cleaning, we deliver compassionate, personalized dental care for your whole family.",
   primaryCtaLabel: "Book a Visit",
   primaryCtaUrl: "/booking",
   secondaryCtaLabel: "Explore Treatments",
@@ -128,7 +128,7 @@ export const DEFAULT_HERO_SETTINGS: HeroSectionSettings = {
   statSpecialistsLabel: "specialists",
   ratingScore: "4.8",
   reviewCount: "1.1k",
-  subCaption: "Caring for Coimbatore & Erode smiles since 2017 · Sri Saraswathi Dental Clinic",
+  subCaption: "Trusted Dental Clinic in Erode & Surampatti · Sri Saraswathi Dental Clinic",
   highlight1Value: "15+",
   highlight1Title: "Years Experience",
   highlight1Detail: "Dedicated clinical care in Erode",

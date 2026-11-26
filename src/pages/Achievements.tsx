@@ -4,6 +4,8 @@ import { ArrowRight, Award, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSiteContent } from "@/components/home/SiteContentSections";
 import { resolveApiAsset, type SiteContent } from "@/lib/api";
+import { SEOHead } from "@/components/seo/SEOHead";
+import { getBreadcrumbSchema, getDentistSchema } from "@/components/seo/schemas";
 
 function AchievementCards({ homepage = false }: { homepage?: boolean }) {
   const { items, loading } = useSiteContent("achievement");
@@ -21,7 +23,15 @@ function AchievementCards({ homepage = false }: { homepage?: boolean }) {
   return <>
     <section className={homepage ? "bg-[#F5F2EB] px-4 py-16 sm:py-20" : "min-h-[70vh] bg-[#F5F2EB] px-4 pb-20 pt-[125px] sm:pt-[145px]"}>
       <div className="container-x">
-        <div className="mx-auto max-w-2xl text-center"><p className="inline-flex items-center gap-2 rounded-full border border-[#E95A35] bg-[#E95A35] px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white shadow-[0_10px_22px_-8px_rgba(233,90,53,0.6)]"><Award className="h-3.5 w-3.5 text-white" /> Professional milestones</p><h2 className="mt-3 font-display text-[32px] font-bold leading-tight tracking-[-.035em] text-[#1F6878] sm:text-[42px]">Excellence Beyond <span className="text-[#1F6878]">Dentistry.</span></h2><p className="mt-3 text-[14px] leading-7 text-[#707574]">Professional achievements shared by the clinic team.</p></div>
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="inline-flex items-center gap-2 rounded-full border border-[#E95A35] bg-[#E95A35] px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white shadow-[0_10px_22px_-8px_rgba(233,90,53,0.6)]"><Award className="h-3.5 w-3.5 text-white" /> Professional milestones</p>
+          {homepage ? (
+            <h2 className="mt-3 font-display text-[32px] font-bold leading-tight tracking-[-.035em] text-[#1F6878] sm:text-[42px]">Excellence Beyond <span className="text-[#1F6878]">Dentistry.</span></h2>
+          ) : (
+            <h1 className="mt-3 font-display text-[32px] font-bold leading-tight tracking-[-.035em] text-[#1F6878] sm:text-[42px]">Excellence Beyond <span className="text-[#1F6878]">Dentistry</span> — Clinical Achievements</h1>
+          )}
+          <p className="mt-3 text-[14px] leading-7 text-[#707574]">Professional achievements shared by Dr. Kishore Kumar and the clinic team in Erode.</p>
+        </div>
         {loading ? <div className="mt-9 grid min-h-36 place-items-center rounded-3xl border border-[#1F6878]/15 bg-white text-sm text-[#707574]">Loading achievements…</div> : achievements.length ? <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {achievements.slice(0, homepage ? 3 : undefined).map((item) => <button type="button" key={item.id} onClick={() => setSelected(item)} className="group overflow-hidden rounded-[20px] border border-[#1F6878]/15 bg-white text-left shadow-[0_12px_30px_-24px_rgba(31,104,120,.35)] transition hover:-translate-y-1 hover:border-[#1F6878]/40 hover:shadow-lg">
             {item.mediaUrl && <div className="aspect-[4/3] overflow-hidden bg-[#E4F0F2]"><img src={resolveApiAsset(item.mediaUrl)} alt={item.title} loading="lazy" decoding="async" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.035]" /></div>}
@@ -35,5 +45,24 @@ function AchievementCards({ homepage = false }: { homepage?: boolean }) {
   </>;
 }
 
-export default function AchievementsPage() { return <main className="min-h-screen"><AchievementCards /></main>; }
+export default function AchievementsPage() {
+  const breadcrumbs = getBreadcrumbSchema([
+    { name: "Home", url: "https://drkishoredentist.com/" },
+    { name: "Our Dentists", url: "https://drkishoredentist.com/our-dentists" },
+    { name: "Achievements", url: "https://drkishoredentist.com/our-dentists/achievements" },
+  ]);
+  return (
+    <>
+      <SEOHead
+        title="Dentist Achievements & Milestones in Erode | Sri Saraswathi Dental"
+        description="Explore the professional milestones, certifications and clinical achievements of Dr. Kishore Kumar and the dental team at Sri Saraswathi Dental Clinic in Erode."
+        canonical="https://drkishoredentist.com/our-dentists/achievements"
+        schema={[breadcrumbs, getDentistSchema()]}
+      />
+      <main className="min-h-screen">
+        <AchievementCards />
+      </main>
+    </>
+  );
+}
 export function HomepageAchievements() { return <AchievementCards homepage />; }

@@ -4,6 +4,7 @@
 
 User-agent: *
 Allow: /
+Allow: /about
 Allow: /treatments/
 Allow: /our-dentists/
 Allow: /blogs/

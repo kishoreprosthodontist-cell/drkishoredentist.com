@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Check, Clock3, Heart, MapPin, Microscope, PhoneCall, ShieldCheck, Sparkles, Users, Wind } from "lucide-react";
 import { clinicImages } from "@/lib/images";
+import { SEOHead } from "@/components/seo/SEOHead";
+import { getBreadcrumbSchema, getDentistLocalBusinessSchema } from "@/components/seo/schemas";
 
 const values = [
   { icon: ShieldCheck, title: "Clear explanations", text: "We talk through what we see, the available options and what each next step involves." },
@@ -12,16 +14,27 @@ const values = [
 ];
 
 export default function AboutPage() {
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Home", url: "https://drkishoredentist.com/" },
+    { name: "About Us", url: "https://drkishoredentist.com/about" },
+  ]);
+
   return (
     <>
+      <SEOHead
+        title="About Sri Saraswathi Dental Clinic | Dental Hospital in Erode"
+        description="Learn about Sri Saraswathi Dental Clinic at Surampatti Four Road, Erode. Led by Dr. Kishore Kumar, offering advanced technology, strict sterilization & gentle dental care."
+        canonical="https://drkishoredentist.com/about"
+        schema={[breadcrumbSchema, getDentistLocalBusinessSchema()]}
+      />
       <main className="min-h-screen bg-[#F5F2EB]">
         <section className="relative mt-[108px] h-[340px] overflow-hidden bg-[#1F6878] sm:h-[400px]">
-          <img src={clinicImages.heroDentalCare} alt="Dentist discussing care with a patient" loading="eager" fetchPriority="high" decoding="async" className="absolute inset-0 h-full w-full object-cover object-[center_17%]" />
+          <img src={clinicImages.heroDentalCare} alt="Dentist discussing care with a patient in Erode" loading="eager" fetchPriority="high" decoding="async" className="absolute inset-0 h-full w-full object-cover object-[center_17%]" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#1F6878]/85 via-[#1F6878]/45 to-[#1F6878]/15" />
           <div className="container-x relative flex h-full items-end pb-8 sm:pb-10">
             <div className="max-w-2xl text-white">
               <p className="inline-flex items-center gap-2 rounded-full border border-[#E95A35] bg-[#E95A35] px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white shadow-[0_10px_22px_-8px_rgba(233,90,53,0.6)]">Sri Saraswathi Dental Clinic · Erode</p>
-              <h1 className="mt-3 font-display text-[32px] font-bold leading-tight tracking-[-.03em] sm:text-[42px]">Care that makes room <span className="text-[#E4F0F2]">for you.</span></h1>
+              <h1 className="mt-3 font-display text-[32px] font-bold leading-tight tracking-[-.03em] sm:text-[42px]">Sri Saraswathi Dental Clinic — <span className="text-[#E4F0F2]">Dental Hospital in Erode</span></h1>
               <Link to="/booking" className="mt-4 inline-flex h-10 items-center gap-2 rounded-full bg-[#E95A35] px-5 text-[11px] font-bold text-white shadow-[0_10px_24px_-10px_rgba(233,90,53,0.75)] transition hover:-translate-y-0.5 hover:bg-[#D14824]">Book a visit <ArrowUpRight className="h-3.5 w-3.5" /></Link>
             </div>
           </div>

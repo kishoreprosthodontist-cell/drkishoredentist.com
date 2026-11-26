@@ -18,6 +18,7 @@ const Booking = lazy(() => import("@/pages/Booking"));
 const Blog = lazy(() => import("@/pages/Blog"));
 const BlogArticle = lazy(() => import("@/pages/BlogArticle"));
 const Contact = lazy(() => import("@/pages/Contact"));
+const About = lazy(() => import("@/pages/About"));
 const Dentists = lazy(() => import("@/pages/Dentists"));
 const Treatments = lazy(() => import("@/pages/Treatments"));
 const Emergency = lazy(() => import("@/pages/Emergency"));
@@ -74,7 +75,7 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/about" element={<Navigate to="/contact" replace />} />
+        <Route path="/about" element={<About />} />
         <Route path="/ai-features" element={<AiFeatures />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/register" element={<Register />} />
@@ -86,6 +87,7 @@ function AppRoutes() {
         <Route path="/our-dentists" element={<Dentists />} />
         <Route path="/our-dentists/achievements" element={<AchievementsPage />} />
         <Route path="/our-dentists/:slug" element={<DoctorProfilePage />} />
+        <Route path="/dentists/:slug" element={<DoctorProfilePage />} />
         <Route path="/dentists" element={<Navigate to="/our-dentists" replace />} />
         <Route path="/clinic-gallery" element={<GalleryPage />} />
         <Route path="/gallery" element={<Navigate to="/clinic-gallery" replace />} />

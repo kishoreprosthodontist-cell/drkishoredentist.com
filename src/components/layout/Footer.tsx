@@ -5,16 +5,25 @@ import { Phone, Mail, MapPin, Clock, Sparkles, ArrowUpRight } from "lucide-react
 
 const services = [
   { label: "All treatments", href: "/treatments" },
+  { label: "Root Canal Treatment", href: "/treatments/root-canal-treatment" },
+  { label: "Dental Implants", href: "/treatments/dental-implants" },
+  { label: "Braces & Orthodontics", href: "/treatments/braces-orthodontic-treatment" },
+  { label: "Teeth Cleaning & Scaling", href: "/treatments/teeth-cleaning-scaling" },
+  { label: "Teeth Whitening", href: "/treatments/teeth-whitening" },
+  { label: "Dental Crowns & Bridges", href: "/treatments/dental-crowns-bridges" },
+  { label: "Wisdom Tooth Extraction", href: "/treatments/wisdom-tooth" },
+  { label: "Pediatric Dentistry", href: "/treatments/pediatric-dentistry" },
 ];
 
 const quickLinks = [
+  { label: "About Clinic", href: "/about" },
   { label: "Our Dentists", href: "/our-dentists" },
   { label: "Doctors’ Achievements", href: "/our-dentists/achievements" },
   { label: "Clinic Gallery", href: "/clinic-gallery" },
   { label: "Before & After", href: "/gallery/before-after" },
   { label: "Blogs", href: "/blogs" },
   { label: "Patient Portal", href: "/patient-portal" },
-  { label: "Contact & About", href: "/contact" },
+  { label: "Contact & Location", href: "/contact" },
   { label: "Book a visit", href: "/booking" },
 ];
 

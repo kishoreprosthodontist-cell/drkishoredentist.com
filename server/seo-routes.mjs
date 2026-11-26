@@ -13,11 +13,13 @@ export function registerSeoRoutes(app, d1, requireAdmin) {
 
       // Static indexable public routes
       const staticUrls = [
-        { loc: `${BASE_URL}/`, priority: "1.0", changefreq: "daily" },
+        { loc: `${BASE_URL}`, priority: "1.0", changefreq: "daily" },
+        { loc: `${BASE_URL}/about`, priority: "0.8", changefreq: "monthly" },
         { loc: `${BASE_URL}/treatments`, priority: "0.9", changefreq: "weekly" },
         { loc: `${BASE_URL}/our-dentists`, priority: "0.8", changefreq: "weekly" },
+        { loc: `${BASE_URL}/our-dentists/dr-kishore-kumar`, priority: "0.8", changefreq: "weekly" },
         { loc: `${BASE_URL}/our-dentists/achievements`, priority: "0.7", changefreq: "monthly" },
-        { loc: `${BASE_URL}/contact`, priority: "0.8", changefreq: "monthly" },
+        { loc: `${BASE_URL}/contact`, priority: "0.9", changefreq: "monthly" },
         { loc: `${BASE_URL}/booking`, priority: "0.8", changefreq: "monthly" },
         { loc: `${BASE_URL}/emergency`, priority: "0.8", changefreq: "monthly" },
         { loc: `${BASE_URL}/reviews`, priority: "0.7", changefreq: "weekly" },
@@ -27,6 +29,8 @@ export function registerSeoRoutes(app, d1, requireAdmin) {
         { loc: `${BASE_URL}/blogs`, priority: "0.8", changefreq: "weekly" },
         { loc: `${BASE_URL}/tele-dentistry`, priority: "0.6", changefreq: "monthly" },
         { loc: `${BASE_URL}/ai-features`, priority: "0.6", changefreq: "monthly" },
+        { loc: `${BASE_URL}/privacy-policy`, priority: "0.4", changefreq: "yearly" },
+        { loc: `${BASE_URL}/terms-of-service`, priority: "0.4", changefreq: "yearly" },
       ];
 
       // Fetch dynamic active treatments
@@ -135,6 +139,7 @@ ${allUrls
 
 User-agent: *
 Allow: /
+Allow: /about
 Allow: /treatments/
 Allow: /our-dentists/
 Allow: /blogs/

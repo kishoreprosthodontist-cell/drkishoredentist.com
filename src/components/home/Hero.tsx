@@ -13,12 +13,16 @@ import {
 function renderHeroHeading(title?: string) {
   const headingText = (title || DEFAULT_HERO_SETTINGS.heading).trim();
 
-  if (headingText === DEFAULT_HERO_SETTINGS.heading) {
+  if (
+    headingText === DEFAULT_HERO_SETTINGS.heading ||
+    headingText === "Your Smile Deserves Expert Care. A Lifetime of Confidence" ||
+    headingText.includes("Best Dental Clinic in Erode")
+  ) {
     return (
       <>
-        Your Smile Deserves
-        <br className="hidden sm:inline" /> Expert Care. A Lifetime
-        <br className="hidden sm:inline" /> of Confidence.
+        Best Dental Clinic in Erode
+        <br className="hidden sm:inline" /> Expert Care &amp; A Lifetime
+        <br className="hidden sm:inline" /> of Confident Smiles.
       </>
     );
   }

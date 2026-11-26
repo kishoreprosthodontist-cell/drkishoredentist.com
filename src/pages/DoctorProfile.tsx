@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, CalendarDays, Stethoscope, UserRound } from "lucide-react";
 import { useSiteContent } from "@/components/home/SiteContentSections";
-import { resolveApiAsset } from "@/lib/api";
+import { resolveApiAsset, type SiteContent } from "@/lib/api";
 import { SEOHead } from "@/components/seo/SEOHead";
 import { getBreadcrumbSchema, getPersonSchema } from "@/components/seo/schemas";
 
@@ -10,15 +10,65 @@ export default function DoctorProfilePage() {
   const { slug = "" } = useParams();
   const { items, loading } = useSiteContent("doctor");
   const doctor = useMemo(() => {
-    const item = items.find((doc) => doc.slug === slug || String(doc.id) === slug);
-    if (!item) return null;
-    const name = String(item.title || "").trim();
-    const media = String(item.mediaUrl || "").trim();
-    if (!name || name.length < 3 || /test\s*\d+/i.test(name) || !media) return null;
-    return item;
+    const isDrKishore = slug === "dr-kishore-kumar" || slug === "dr-kishore" || slug === "doctor-1";
+    const item = items.find(
+      (doc) =>
+        doc.slug === slug ||
+        String(doc.id) === slug ||
+        (isDrKishore && (doc.id === 1 || doc.slug === "doctor-1" || doc.title?.toLowerCase().includes("kishore")))
+    );
+    if (item) {
+      const name = String(item.title || "").trim();
+      const media = String(item.mediaUrl || "").trim();
+      if (name && name.length >= 3 && !/test\s*\d+/i.test(name) && media) {
+        return item;
+      }
+    }
+    if (isDrKishore) {
+      return {
+        id: 1,
+        type: "doctor" as const,
+        title: "Dr. Kishore Kumar",
+        slug: "dr-kishore-kumar",
+        subtitle: "BDS, MDS — Chief Dental Surgeon",
+        category: "Prosthodontist & Implantologist",
+        author: "",
+        excerpt:
+          "Dr. Kishore Kumar (BDS, MDS) is a leading dental surgeon in Erode specializing in advanced dental implants, painless root canal treatments, and aesthetic smile rehabilitation.",
+        body:
+          "With more than 15 years of dedicated clinical practice in Surampatti, Erode, Dr. Kishore Kumar combines advanced clinical precision with genuine warmth and patient empathy. He believes in listening first, thoroughly explaining every treatment step, and delivering gentle, pain-free dental care tailored to each patient’s personal comfort.",
+        mediaUrl: "/images/clinic/dentist-portrait.webp",
+        mobileMediaUrl: "",
+        logoUrl: "",
+        beforeImage: "",
+        afterImage: "",
+        linkUrl: "",
+        ctaLabel: "",
+        secondaryCtaLabel: "",
+        secondaryCtaUrl: "",
+        badgeText: "Chief Dental Surgeon & Implantologist",
+        ratingScore: "4.9",
+        reviewCount: "120+",
+        displayOrder: 1,
+        published: true,
+        homepageHighlight: true,
+        patientConsent: true,
+        status: "active",
+        qualification: "BDS, MDS",
+        specialization: "Prosthodontics & Implantology",
+        yearsExperience: "15+",
+        metaTitle: "",
+        metaDescription: "",
+        metaKeywords: "",
+        publishedAt: new Date().toISOString(),
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      } as unknown as SiteContent;
+    }
+    return null;
   }, [items, slug]);
 
-  if (loading) {
+  if (loading && !doctor) {
     return (
       <main className="grid min-h-[70vh] place-items-center bg-[#F5F2EB] text-sm text-[#707574]">
         Loading dentist profile…
@@ -48,13 +98,17 @@ export default function DoctorProfilePage() {
     );
   }
 
-  const canonicalUrl = `https://drkishoredentist.com/our-dentists/${doctor.slug || doctor.id}`;
+  const resolvedSlug =
+    doctor.slug === "doctor-1" || slug === "dr-kishore-kumar" || doctor.title?.toLowerCase().includes("kishore")
+      ? "dr-kishore-kumar"
+      : doctor.slug || doctor.id;
+  const canonicalUrl = `https://drkishoredentist.com/our-dentists/${resolvedSlug}`;
   const ogImageUrl = doctor.mediaUrl ? resolveApiAsset(doctor.mediaUrl) : undefined;
-  const pageTitle = `${doctor.title} | Dentist in Erode | Sreesaraswathi Dental Clinic`;
+  const pageTitle = `${doctor.title} | Dental Surgeon in Erode | Dr Kishore Dentist`;
   const pageDescription =
     doctor.excerpt && doctor.excerpt.length > 20
-      ? `${doctor.excerpt.slice(0, 150)}... Sreesaraswathi Dental Clinic, Erode.`
-      : `${doctor.title} at Sreesaraswathi Dental Clinic in Erode. Dedicated dental care, modern treatments, and consultations. Book an appointment today.`;
+      ? `${doctor.excerpt.slice(0, 150)}... Consult Dr. Kishore Kumar at Sri Saraswathi Dental Clinic, Surampatti, Erode.`
+      : `${doctor.title} at Sri Saraswathi Dental Clinic in Erode. Dedicated dental care, painless root canals, implants, and consultations. Book an appointment today.`;
 
   const breadcrumbSchema = getBreadcrumbSchema([
     { name: "Home", url: "https://drkishoredentist.com/" },

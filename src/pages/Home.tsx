@@ -13,6 +13,7 @@ import { GoogleReviewsSection } from "@/components/home/GoogleReviewsSection";
 import { WhyChooseUs } from "@/components/home/WhyChooseUs";
 import { LatestDentalBlogs } from "@/components/home/LatestDentalBlogs";
 import { FinalHomepageGallery } from "@/components/home/FinalHomepageGallery";
+import { LocalCatchmentSection } from "@/components/home/LocalCatchmentSection";
 
 export default function HomePage() {
   useEffect(() => {
@@ -22,19 +23,23 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-[#F5F2EB]">
       <SEOHead
-        title="Sreesaraswathi Dental Clinic | Dentist & Dental Care in Erode"
-        description="Looking for professional dental care? Explore dental treatments, meet our doctors and book your appointment at Sreesaraswathi Dental Clinic in Erode."
+        title="Best Dental Clinic in Erode | Sri Saraswathi Dental | Dr. Kishore Kumar"
+        description="Looking for the best dental clinic in Erode? Sri Saraswathi Dental Clinic at Surampatti Four Road offers gentle root canals, dental implants, braces, teeth cleaning & family dentistry."
         canonicalPath="/"
         keywords={[
+          "Best Dental Clinic in Erode",
           "Dentist in Erode",
-          "Dental Clinic in Erode",
+          "Dr Kishore Dentist",
+          "Dentist Near Me",
+          "Dental Clinic Near Me",
           "Best Dentist in Erode",
           "Dental Hospital in Erode",
-          "Dr Kishore Kumar Dentist",
-          "Surampatti Dental Clinic",
+          "Dentist in Surampatti",
+          "Dental Clinic in Surampatti",
+          "Dental Treatment in Erode",
           "Root Canal Treatment in Erode",
-          "Teeth Cleaning in Erode",
           "Dental Implants in Erode",
+          "Teeth Cleaning in Erode",
         ]}
         schema={[getDentistLocalBusinessSchema(), getWebSiteSchema()]}
       />
@@ -69,10 +74,13 @@ export default function HomePage() {
       {/* Section 09 – Why Choose Us */}
       <WhyChooseUs />
 
-      {/* Section 10 – Latest Dental Blogs */}
+      {/* Section 10 – Location, Directions & Feeder Areas */}
+      <LocalCatchmentSection />
+
+      {/* Section 11 – Latest Dental Blogs */}
       <LatestDentalBlogs />
 
-      {/* Section 11 – Final Homepage Showcase / Gallery */}
+      {/* Section 12 – Final Homepage Showcase / Gallery */}
       <FinalHomepageGallery />
     </main>
   );

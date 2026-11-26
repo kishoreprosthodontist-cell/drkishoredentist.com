@@ -44,8 +44,8 @@ export default function DentistsPage() {
   return (
     <>
       <SEOHead
-        title="Best Dentists in Erode | Dr. Kishore Kumar | Sreesaraswathi Dental"
-        description="Meet Dr. Kishore Kumar and the expert dental team at Sreesaraswathi Dental Clinic in Erode. Dedicated specialists providing gentle, modern dental care."
+        title="Best Dentist in Erode | Dr. Kishore Kumar | Sri Saraswathi Dental"
+        description="Looking for the best dentist in Erode? Meet Dr. Kishore Kumar and the expert team at Sri Saraswathi Dental Clinic, Surampatti. Experienced in painless root canals, implants & braces."
         canonical="https://drkishoredentist.com/our-dentists"
         schema={[breadcrumbSchema, getDentistSchema()]}
       />
@@ -53,11 +53,14 @@ export default function DentistsPage() {
       <section className="container-x">
         <div className="mx-auto max-w-3xl text-center">
           <p className="inline-flex items-center gap-2 rounded-full border border-[#E95A35] bg-[#E95A35] px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white shadow-[0_10px_22px_-8px_rgba(233,90,53,0.6)]">
-            <Stethoscope className="h-3.5 w-3.5 text-white" /> Our dentists
+            <Stethoscope className="h-3.5 w-3.5 text-white" /> Our dentists in Erode
           </p>
           <h1 className="mt-3 font-display text-[34px] font-bold leading-tight tracking-[-.035em] text-[#1F6878] sm:text-[48px]">
-            Meet the <span className="text-[#1F6878]">experts</span> behind your smile.
+            Meet the <span className="text-[#1F6878]">Best Dentists in Erode</span> — Dr. Kishore Kumar &amp; Team
           </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-[14px] leading-relaxed text-[#707574] sm:text-[15.5px]">
+            From gentle root canal treatments and dental implants to braces and routine checkups, our experienced dental specialists in Erode are dedicated to personalized care for you and your family.
+          </p>
           <p className="mx-auto mt-4 max-w-2xl text-[14px] leading-7 text-[#707574]">
             Get to know the clinicians who provide personalized, compassionate dental care at Sri Saraswathi Dental Clinic.
           </p>

@@ -83,6 +83,15 @@ export function getDentistLocalBusinessSchema() {
         description: "Scheduled Emergency Dental Visits Only",
       },
     ],
+    areaServed: [
+      { "@type": "AdministrativeArea", name: "Erode" },
+      { "@type": "AdministrativeArea", name: "Surampatti" },
+      { "@type": "AdministrativeArea", name: "Perundurai Road" },
+      { "@type": "AdministrativeArea", name: "Thindal" },
+      { "@type": "AdministrativeArea", name: "Sampath Nagar" },
+      { "@type": "AdministrativeArea", name: "EVN Road" },
+      { "@type": "AdministrativeArea", name: "Kollampalayam" },
+    ],
     employee: [
       {
         "@type": "Person",

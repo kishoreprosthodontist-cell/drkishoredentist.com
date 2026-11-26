@@ -58,9 +58,11 @@ export function SEOHead({
     const finalTitle = title ? `${title}` : DEFAULT_TITLE;
     const finalDesc = description || DEFAULT_DESCRIPTION;
     const rawPath = canonicalPath ?? canonical ?? location.pathname;
-    const canonicalUrl = rawPath.startsWith("http")
-      ? rawPath
-      : `${CLINIC_BASE_URL}${rawPath.startsWith("/") ? rawPath : `/${rawPath}`}`.replace(/\/+$/, "") || CLINIC_BASE_URL;
+    const cleanRawPath = rawPath.replace(/\/+$/, "");
+    const canonicalUrl = cleanRawPath.startsWith("http")
+      ? (cleanRawPath === "https://drkishoredentist.com" ? "https://drkishoredentist.com" : cleanRawPath)
+      : `${CLINIC_BASE_URL}${cleanRawPath.startsWith("/") ? cleanRawPath : `/${cleanRawPath}`}`;
+    const normalizedCanonical = canonicalUrl || CLINIC_BASE_URL;
     const finalImage = ogImage
       ? ogImage.startsWith("http")
         ? ogImage

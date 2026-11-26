@@ -23,43 +23,44 @@ export default function ServicePage() {
   const treatment = treatments.find((item) => item.slug === slug || String(item.id) === slug);
   if (loading) return <main className="grid min-h-[70vh] place-items-center bg-[#F5F2EB] text-sm text-[#707574]">Loading treatment information…</main>;
   if (!treatment) return <main className="grid min-h-[70vh] place-items-center bg-[#F5F2EB] px-4 pt-20"><div className="max-w-md text-center"><h1 className="font-display text-2xl font-bold text-[#1F6878]">Treatment information is unavailable</h1><p className="mt-2 text-sm leading-6 text-[#707574]">This treatment may have been unpublished or the link may have changed.</p><Link to="/treatments" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#E95A35] hover:text-[#D14824]"><ArrowLeft className="h-4 w-4" /> Explore treatments</Link></div></main>;
-  const bookingHref = `/booking?service=${encodeURIComponent(treatment.slug || treatment.title)}`;
+  const cleanTitle = (treatment.title || "Dental Treatment").replace(/^\.\s*/, "").trim();
+  const bookingHref = `/booking?service=${encodeURIComponent(treatment.slug || cleanTitle)}`;
   const related = treatments.filter((item) => item.id !== treatment.id && (treatment.category ? item.category === treatment.category : true)).slice(0, 3);
-  const description = treatment.excerpt || "Talk with the clinic team about your dental concern and the care options that may suit you.";
+  const description = treatment.excerpt || `Professional ${cleanTitle.toLowerCase()} provided by Dr. Kishore Kumar at Sri Saraswathi Dental Clinic, Surampatti, Erode.`;
 
   const treatmentFaqs = [
     {
-      question: `Is ${treatment.title.toLowerCase()} suitable for me?`,
-      answer: "Your dentist can assess your needs and explain suitable options during a visit.",
+      question: `Is ${cleanTitle.toLowerCase()} suitable for me?`,
+      answer: "Your dentist can assess your teeth and oral health needs and explain the most suitable treatment options during a consultation.",
     },
     {
       question: "How much time and cost should I plan for?",
       answer:
-        "Timing and fees depend on your assessment and care plan. The clinic team will discuss these with you before treatment.",
+        "Timing and fees depend on your individual assessment and care plan. Dr. Kishore Kumar will discuss all options transparently with you before starting treatment.",
     },
     {
-      question: "How do I book?",
+      question: "How do I book an appointment?",
       answer:
-        "Choose an available date and time in the existing appointment booking flow, or contact the clinic for help.",
+        "Choose an available date and time in our online appointment booking flow, or call our Surampatti clinic at 0424 427 2494.",
     },
   ];
 
-  const pageTitle = `${treatment.title} in Erode | Dr. Kishore Kumar | Sreesaraswathi Dental Clinic`;
+  const pageTitle = `${cleanTitle} in Erode | Sri Saraswathi Dental Clinic | Dr. Kishore Kumar`;
   const pageDescription =
     treatment.excerpt && treatment.excerpt.length > 20
-      ? `${treatment.excerpt.slice(0, 150)}... Provided at Sreesaraswathi Dental Clinic, Erode.`
-      : `${treatment.title} at Sreesaraswathi Dental Clinic, Surampatti, Erode. Consult Dr. Kishore Kumar for expert dental care. Book your appointment online today.`;
+      ? `${treatment.excerpt.slice(0, 150)}... Provided at Sri Saraswathi Dental Clinic, Surampatti, Erode by Dr. Kishore Kumar.`
+      : `${cleanTitle} at Sri Saraswathi Dental Clinic, Surampatti Four Road, Erode. Consult Dr. Kishore Kumar for gentle, expert dental care. Book online today.`;
   const canonicalUrl = `https://drkishoredentist.com/treatments/${treatment.slug || treatment.id}`;
   const ogImageUrl = treatment.mediaUrl ? resolveApiAsset(treatment.mediaUrl) : undefined;
 
   const breadcrumbSchema = getBreadcrumbSchema([
     { name: "Home", url: "https://drkishoredentist.com/" },
     { name: "Treatments", url: "https://drkishoredentist.com/treatments" },
-    { name: treatment.title, url: canonicalUrl },
+    { name: cleanTitle, url: canonicalUrl },
   ]);
 
   const medicalProcedureSchema = getMedicalProcedureSchema({
-    name: treatment.title,
+    name: cleanTitle,
     description: treatment.excerpt || description,
     procedureType: "MedicalProcedure",
     duration: treatment.duration,
@@ -79,7 +80,7 @@ export default function ServicePage() {
         schema={[breadcrumbSchema, medicalProcedureSchema, faqSchema]}
       />
       <main className="min-h-screen bg-white">
-      <section className="bg-[#F5F2EB] px-4 pb-12 pt-[118px] md:pb-16 md:pt-[140px]"><div className="container-x"><div className="mb-5 flex items-center gap-2 text-[10px] text-[#707574]"><Link to="/treatments" className="hover:text-[#1F6878]">Treatments</Link><ChevronRight className="h-3 w-3" /><span className="font-semibold text-[#1F6878]">{treatment.title}</span></div><div className="grid items-center gap-8 lg:grid-cols-[1fr_.9fr] lg:gap-12"><div><p className="inline-flex items-center gap-2 rounded-full border border-[#E95A35] bg-[#E95A35] px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white shadow-[0_10px_22px_-8px_rgba(233,90,53,0.6)]">{treatment.category || "Treatment guide"} · Erode</p><h1 className="mt-3 max-w-[670px] font-display text-[36px] font-bold leading-[1.06] tracking-[-.04em] text-[#1F6878] sm:text-[48px]">{treatment.title}</h1><p className="mt-4 max-w-[600px] text-[14px] leading-7 text-[#707574]">{description}</p><div className="mt-5 flex flex-wrap gap-2 text-[10px] font-semibold text-[#1F6878]">{treatment.duration && <span className="inline-flex items-center gap-1.5 rounded-full bg-[#E4F0F2] px-3 py-1.5"><Clock3 className="h-3.5 w-3.5 text-[#1F6878]" />{treatment.duration}</span>}{treatment.sessions && <span className="inline-flex items-center gap-1.5 rounded-full bg-[#E4F0F2] px-3 py-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-[#1F6878]" />{treatment.sessions}</span>}{treatment.price > 0 && <span className="rounded-full bg-[#E4F0F2] px-3 py-1.5 text-[#1F6878]">₹{treatment.price.toLocaleString("en-IN")}</span>}</div><div className="mt-6 flex flex-wrap gap-2.5">{treatment.availableForBooking ? <Link to={bookingHref} className="inline-flex h-11 items-center gap-2 rounded-full bg-[#E95A35] px-5 text-[11px] font-bold text-white shadow-[0_12px_24px_-12px_rgba(233,90,53,0.55)] transition hover:-translate-y-0.5 hover:bg-[#D14824]"><CalendarDays className="h-4 w-4" /> Book This Treatment</Link> : <Link to="/contact" className="inline-flex h-11 items-center gap-2 rounded-full bg-[#E95A35] px-5 text-[11px] font-bold text-white shadow-[0_12px_24px_-12px_rgba(233,90,53,0.55)] transition hover:bg-[#D14824]"><Phone className="h-4 w-4" /> Ask about availability</Link>}<a href="tel:+914244272494" className="inline-flex h-11 items-center gap-2 rounded-full border border-[#1F6878]/25 bg-white px-5 text-[11px] font-semibold text-[#1F6878] transition hover:border-[#1F6878] hover:bg-[#E4F0F2]"><Phone className="h-3.5 w-3.5 text-[#1F6878]" /> Call the clinic</a></div></div>
+      <section className="bg-[#F5F2EB] px-4 pb-12 pt-[118px] md:pb-16 md:pt-[140px]"><div className="container-x"><div className="mb-5 flex items-center gap-2 text-[10px] text-[#707574]"><Link to="/treatments" className="hover:text-[#1F6878]">Treatments</Link><ChevronRight className="h-3 w-3" /><span className="font-semibold text-[#1F6878]">{cleanTitle}</span></div><div className="grid items-center gap-8 lg:grid-cols-[1fr_.9fr] lg:gap-12"><div><p className="inline-flex items-center gap-2 rounded-full border border-[#E95A35] bg-[#E95A35] px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white shadow-[0_10px_22px_-8px_rgba(233,90,53,0.6)]">{treatment.category || "Treatment guide"} · Erode</p><h1 className="mt-3 max-w-[670px] font-display text-[36px] font-bold leading-[1.06] tracking-[-.04em] text-[#1F6878] sm:text-[48px]">{cleanTitle} in Erode</h1><p className="mt-4 max-w-[600px] text-[14px] leading-7 text-[#707574]">{description}</p><div className="mt-5 flex flex-wrap gap-2 text-[10px] font-semibold text-[#1F6878]">{treatment.duration && <span className="inline-flex items-center gap-1.5 rounded-full bg-[#E4F0F2] px-3 py-1.5"><Clock3 className="h-3.5 w-3.5 text-[#1F6878]" />{treatment.duration}</span>}{treatment.sessions && <span className="inline-flex items-center gap-1.5 rounded-full bg-[#E4F0F2] px-3 py-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-[#1F6878]" />{treatment.sessions}</span>}{treatment.price > 0 && <span className="rounded-full bg-[#E4F0F2] px-3 py-1.5 text-[#1F6878]">₹{treatment.price.toLocaleString("en-IN")}</span>}</div><div className="mt-6 flex flex-wrap gap-2.5">{treatment.availableForBooking ? <Link to={bookingHref} className="inline-flex h-11 items-center gap-2 rounded-full bg-[#E95A35] px-5 text-[11px] font-bold text-white shadow-[0_12px_24px_-12px_rgba(233,90,53,0.55)] transition hover:-translate-y-0.5 hover:bg-[#D14824]"><CalendarDays className="h-4 w-4" /> Book This Treatment</Link> : <Link to="/contact" className="inline-flex h-11 items-center gap-2 rounded-full bg-[#E95A35] px-5 text-[11px] font-bold text-white shadow-[0_12px_24px_-12px_rgba(233,90,53,0.55)] transition hover:bg-[#D14824]"><Phone className="h-4 w-4" /> Ask about availability</Link>}<a href="tel:+914244272494" className="inline-flex h-11 items-center gap-2 rounded-full border border-[#1F6878]/25 bg-white px-5 text-[11px] font-semibold text-[#1F6878] transition hover:border-[#1F6878] hover:bg-[#E4F0F2]"><Phone className="h-3.5 w-3.5 text-[#1F6878]" /> Call the clinic</a></div></div>
           <div className="relative overflow-hidden rounded-[22px] border border-[#1F6878]/15 bg-[#E4F0F2] shadow-[0_14px_36px_-24px_rgba(31,104,120,.35)]">{treatment.mediaUrl && <img src={resolveApiAsset(treatment.mediaUrl)} alt={treatment.title} loading="eager" decoding="async" className="aspect-[1.35/1] w-full object-cover" />}<div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#1F6878]/80 to-transparent p-5 pt-12 text-white"><p className="text-[10px] font-semibold uppercase tracking-[.13em]">Care discussed with your dentist</p></div></div>
         </div></div></section>
 
